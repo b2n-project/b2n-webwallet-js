@@ -27,14 +27,14 @@ namespace WebWallet
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-        #region Windows Hosting Under IIS
-#if RELEASE
-                //comment this region out if using anything otehr than IIS
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-#endif
-#endregion
+//         // #region Windows Hosting Under IIS
+// #if RELEASE
+//                 //comment this region out if using anything otehr than IIS
+//                 // .UseKestrel()
+//                 // .UseIISIntegration()
+//                 // .UseContentRoot(Directory.GetCurrentDirectory())
+// #endif
+// #endregion
                 .UseStartup<Startup>();
     }
 }
