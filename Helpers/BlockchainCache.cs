@@ -92,51 +92,59 @@ namespace WebWallet.Helpers
                         }
                         //TODO: This is Currently re-importing the last 1000 blocks in every batch... need to fix that and add in a checking mechanism to 
                         //get it re-checking cached files... 
+                        
+                        var counter = 1;
+                        var gCounter = start;
+
+                        var txHashes = new List<string>();
+
                         if (currentHeight > start)
                         {
-                            var counter = start;
                             if (end > currentHeight) end = currentHeight;
-                            try
+                            for (var j = start; j <= end; j++)
                             {
-                                var startBlock = (start / batchSize) * batchSize; //get the first "batch of 1000 to start with
-                                for (var y = startBlock; y <= end; y+= batchSize)
+                                var height_args = new int[] { j };
+                                var blockHash = "";
+                                try
                                 {
-                                    var endBlock = end < y + batchSize ? end : y + batchSize;
-                                    List<int> blockHeights = new List<int>();
-                                    for (var x = y; x < endBlock; x++)
-                                    {
-                                        blockHeights.Add(x);
-                                    }
-                                    if (blockHeights.Any())
-                                    {
-                                        //fetch the transactions
-                                        var args = new Dictionary<string, object>();
-                                        args.Add("blockHeights", blockHeights);
-                                        var blocks = RpcHelper.Request<BlockResp>("get_blocks_details_by_heights", args).blocks;
-                                        List<CachedTx> transactionsToInsert = new List<CachedTx>();
-                                        foreach (var block in blocks)
-                                        {
-                                            foreach (var transaction in block.transactions)
-                                            {
-                                                var cachedTx = TransactionHelpers.MapTx(transaction);
-                                                //persist tx's to cache
-                                                if (cachedTx != null && !transactions.Find(x => x.hash == cachedTx.hash).Any())
-                                                {
-                                                    transactionsToInsert.Add(cachedTx);
-                                                }
-                                            }
+                                    blockHash = RpcHelper.RequestJson<HashResp>("on_getblockhash", height_args).result;
+                                }
+                                catch { }
+                                if (!string.IsNullOrEmpty(blockHash))
+                                {
+                                    //then, get the blockHash for the height we're currently processing...
+                                    var hash_args = new Dictionary<string, object>();
+                                    hash_args.Add("hash", blockHash);
+                                    //if it fails here we need to exit the loop
 
+                                    txHashes.AddRange(RpcHelper.RequestJson<BlockJsonResp>("f_block_json", hash_args).result.block.transactions.Select(x => x.hash).ToList<string>());
+                                    if (counter == 50 || gCounter == currentHeight)
+                                    {
+                                        var tx_args = new Dictionary<string, object>();
+                                        tx_args.Add("transactionHashes", txHashes.ToArray());
+                                        var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_args);
+                                        var transactionsToInsert = new List<CachedTx>();
+                                        foreach (var tx in txs.transactions)
+                                        {
+                                            var cachedTx = TransactionHelpers.MapTx(tx);
+                                            //persist tx's to cache
+                                            if (cachedTx != null && !transactions.Find(x => x.hash == cachedTx.hash).Any())
+                                            {
+                                                transactionsToInsert.Add(cachedTx);
+                                            }
                                         }
                                         if (transactionsToInsert.Any())
                                         {
                                             transactions.InsertBulk(transactionsToInsert);
+                                            var heights = transactionsToInsert.Select(x => x.height).Distinct().OrderBy(x => x).ToList();
                                         }
+                                        counter = 0;
+                                        txHashes.Clear();
                                     }
+                                    gCounter++;
+                                    counter++;
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                LogException(ex);
+
                             }
 
                         }
@@ -146,38 +154,13 @@ namespace WebWallet.Helpers
             }
             catch (Exception ex)
             {
-                LogException(ex);
+                //todo: add logging
             }
             finally
             {
-                logger.Log(LogLevel.Information, $"Job Completed, rescheduling...");
                 //finally, schedule the next check in 30 seconds time
                 BackgroundJob.Schedule(() => BlockchainCache.BuildCache(null), TimeSpan.FromSeconds(30));
             }
-        }
-
-        private static CachedTx AddSingleTransaction(string hash)
-        {
-            var tx_hash = new Dictionary<string, object>();
-            tx_hash.Add("transactionHashes", new string[] { hash });
-            //now try add the individual hash
-            try
-            {
-                var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_hash);
-                var transactionsToInsert = new List<CachedTx>();
-                foreach (var tx in txs.transactions)
-                {
-                    var cachedTx = TransactionHelpers.MapTx(tx);
-                    return cachedTx;
-                }
-            }
-            catch (Exception innerex)
-            {
-                //FAILED
-                logger.LogError($"Failed to add hash: {hash}");
-                LogException(innerex);
-            }
-            return null;
         }
     }
 }
