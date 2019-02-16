@@ -20,7 +20,7 @@ namespace WebWallet.Controllers
         {
 
             //TODO: Update this to split get Tx's from Split BC cache
-            var startHeight = height;
+            var startHeight = Convert.ToInt32(Math.Floor((double)(height / 100) * 100));
             var endHeight = startHeight + 100;
             if (startHeight < 1) startHeight = 1;
             var chainHeight = RpcHelper.Request<GetHeightResp>("getheight").Height;
@@ -33,10 +33,13 @@ namespace WebWallet.Controllers
 
             try
             {
+                //TODO:... if we find a problem - ie: there are ANY tx's that don't return at least one Tx poer height, then we need to re-cache the DB file we're working with for this height...
+                //we need to ensure that there is at least one Tx per block
+                //should this be in a seperate "validation background job that's checking completed files - maybe to run once per day?
                 using (var db = new LiteDatabase(string.Concat(AppContext.BaseDirectory, @"App_Data\", "transactions_", start, "-", end, ".db")))
                 {
                     var transactions = db.GetCollection<CachedTx>("cached_txs");
-                    var txs = transactions.Find(x => x.height >= startHeight && x.height <= endHeight);
+                    var txs = transactions.Find(x => x.height >= startHeight && x.height <= endHeight).Distinct().ToList();
                     return new JsonResult(JsonConvert.SerializeObject(txs));
                 }
             }
