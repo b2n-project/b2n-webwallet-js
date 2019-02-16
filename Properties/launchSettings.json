@@ -1,10 +1,11 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:52356"
+      "applicationUrl": "http://localhost:52276",
+      "sslPort": 44395
     }
   },
   "profiles": {
@@ -16,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "webwallet": {
+    "lumeneo-webwallet": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",

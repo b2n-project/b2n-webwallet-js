@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace WebWallet.Helpers
+ namespace WebWallet.Helpers
 {
     internal static class StaticLogger
     {

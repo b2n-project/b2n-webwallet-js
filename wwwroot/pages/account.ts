@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The TurtleCoin Project
+ * Copyright (c) 2018, The Plenteum Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -29,13 +29,13 @@ let blockchainExplorer = DependencyInjectorInstance().getInstance(Constants.BLOC
 @VueRequireFilter('piconero', VueFilterPiconero)
 class AccountView extends DestructableView{
 	@VueVar([]) transactions !: Transaction[];
-    @VueVar(0) fusionCount !: number;
-    @VueVar(0) walletAmount !: number;
+	@VueVar(0) fusionCount !: number;
+	@VueVar(0) walletAmount !: number;
 	@VueVar(0) unlockedWalletAmount !: number;
 
 	@VueVar(0) currentScanBlock !: number;
 	@VueVar(0) blockchainHeight !: number;
-	@VueVar(100) currencyDivider !: number;
+	@VueVar(100000000) currencyDivider !: number;
 
     intervalRefresh : number = 0;
 
@@ -92,8 +92,8 @@ class AccountView extends DestructableView{
 		this.walletAmount = wallet.amount;
 		this.unlockedWalletAmount = wallet.unlockedAmount(this.currentScanBlock);
 		if(wallet.getAll().length+wallet.txsMem.length !== this.transactions.length) {
-            this.transactions = wallet.txsMem.concat(wallet.getTransactionsCopy().reverse());
-            this.fusionCount = wallet.fusionTxs.length;
+			this.transactions = wallet.txsMem.concat(wallet.getTransactionsCopy().reverse());
+			this.fusionCount = wallet.fusionTxs.length;
 		}
 	}
 }

@@ -97,8 +97,7 @@
       },
       "balanceBlock": {
         "title": "Ваша средства",
-        "unlocked": "Откључано",
-        "fusions": "Fusion transactions to unlock"
+        "unlocked": "Откључано"
       },
       "historyBlock": {
         "title": "Историја ваших трансакција",
@@ -106,7 +105,7 @@
         "emptyWallet": "Тренутно немате средстава у новчанику",
         "waitSync": "Сачекајте да се новчаник освежи",
         "beReallyPatient": "Овај поступак може да потраје...",
-        "getTRTLAddress": "Адреса за пријем новчића"
+        "getLMOAddress": "Адреса за пријем новчића"
       },
       "txDetails": {
         "title": "Transaction details",
@@ -177,7 +176,7 @@
         "title": "Веб новчаник",
         "content": "Овај сервис је дело контрибутора под именом Gnock.<br/>Уколико желите да помогнете при даљем развоју ове апликације, молимо вас да размислите о донацији.<br/><br/>"
       },
-      "masariFundBlock": {
+      "pleFundBlock": {
         "title": "Масари новчаник за донације",
         "content": "Уколико сте заинтересовани да помогнете, можете то учинити слањем средстава на следећу адресу"
       }
@@ -298,10 +297,10 @@
     },
     "miningPage": {
       "title": "Mining information",
-      "subtitle": "Support the network by mining and be rewarded with TRTL",
+      "subtitle": "Support the network by mining and be rewarded with LMO",
       "contentBlock": {
         "title": "How to get started mining",
-        "intro": "Mining helps decentralise the network and allows you to earn TurtleCoin. There is no need for specialist equipment to mine TurtleCoin.",
+        "intro": "Mining helps decentralise the network and allows you to earn Lumeneo. There is no need for specialist equipment to mine Lumeneo.",
         "linkText": "Click here to read our mining guide"
       }
     },

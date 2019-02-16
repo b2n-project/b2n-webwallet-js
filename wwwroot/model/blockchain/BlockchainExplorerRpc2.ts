@@ -100,7 +100,7 @@ export class WalletWatchdog {
 
     checkMempool(): boolean {
         let self = this;
-        if (this.lastMaximumHeight === 0 || this.lastBlockLoading === -1 || (this.lastMaximumHeight - this.lastBlockLoading > 1)) {//only check memory pool if the user is up to date to ensure outs & ins will be found in the wallet
+        if (this.lastMaximumHeight - this.lastBlockLoading > 1) {//only check memory pool if the user is up to date to ensure outs & ins will be found in the wallet
             return false;
         }
 
@@ -159,9 +159,9 @@ export class WalletWatchdog {
 
     checkTransactionsInterval() {
 
-        //somehow we're repeating and regressing back to re-process Tx's 
+        //somehow we're repeating and regressing back to re-process Tx's
         //loadHistory getting into a stack overflow ?
-        //need to work out timinings and ensure process does not reload when it's already running... 
+        //need to work out timinings and ensure process does not reload when it's already running...
 
         if (this.workerProcessingWorking || !this.workerProcessingReady) {
             return;
@@ -244,28 +244,28 @@ export class WalletWatchdog {
                 console.log('load block from ' + startBlock + ' (actual block: ' + previousStartBlock + ') at height :' + height);
                 if (previousStartBlock <= height) {
                     self.explorer.getTransactionsForBlocks(previousStartBlock).then(function (transactions: RawDaemonTransaction[]) {
-                        //to ensure no pile explosion
-                        if (transactions.length > 0) {
-                            let lastTx = transactions[transactions.length - 1];
+                    //to ensure no pile explosion
+                    if (transactions.length > 0) {
+                        let lastTx = transactions[transactions.length - 1];
 
-                            if (typeof lastTx.height !== 'undefined') {
-                                self.lastBlockLoading = lastTx.height + 2; //we're operating one block behind to give the Tx Caching process a chance to catch up
-                            }
+                        if (typeof lastTx.height !== 'undefined') {
+                            self.lastBlockLoading = lastTx.height + 2; //we're operating one block behind to give the Tx Caching process a chance to catch up
                         }
-                        self.processTransactions(transactions);
-                        setTimeout(function () {
+                    }
+                    self.processTransactions(transactions);
+                    setTimeout(function () {
                             self.loadHistory();
-                        }, 1);// then try load history again... 
+                        }, 1);// then try load history again...
                     }).catch(function () {
                         setTimeout(function () {
                             self.loadHistory();
                         }, 30 * 1000);//retry 30s later if an error occurred
                     });
                 } else {
-                    //if we're on the current height, then only try sync every 30 seconds... 
+                    //if we're on the current height, then only try sync every 30 seconds...
                     setTimeout(function () {
                         self.loadHistory();
-                    }, 30000);// then try load history again... 
+                    }, 30000);// then try load history again...
                 }
             } else {
                 setTimeout(function () {
@@ -441,14 +441,14 @@ export class BlockchainExplorerRpc2 implements BlockchainExplorer {
         return new Promise(function (resolve, reject) {
             //console.log('sending:', rawTx);
             $.post(self.serverAddress + 'sendrawtx', { '': rawTx })
-                .done(function (transactions: any) {
-                    if (transactions.status && transactions.status == 'OK') {
-                        resolve(transactions);
-                    } else
-                        reject(transactions);
-                }).fail(function (data: any) {
-                    reject(data);
-                });
+            .done(function (transactions: any) {
+                if (transactions.status && transactions.status == 'OK') {
+                    resolve(transactions);
+                } else
+                    reject(transactions);
+            }).fail(function (data: any) {
+                reject(data);
+            });
         });
     }
 }

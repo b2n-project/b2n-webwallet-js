@@ -1,7 +1,7 @@
 {
   "website":{
-	"title":"Offizielle TurtleCoin Web Wallet",
-	"description":"Offizielle Online Wallet für TurtleCoin currency, anonym, sicher und für optimale Sicherheit vollständig in deinem Browser verwaltet"
+	"title":"Offizielle Lumeneo Web Wallet",
+	"description":"Offizielle Online Wallet für Lumeneo currency, anonym, sicher und für optimale Sicherheit vollständig in deinem Browser verwaltet"
   },
   "messages": {
     "menu": {
@@ -62,8 +62,8 @@
       "github": "GitHub"
     },
     "homepage": {
-      "mainTitle": "Gesicherte TurtleCoin Wallet",
-      "tagLine": "Der einfachste Weg TurtleCoin jederzeit und überall zu nutzen",
+      "mainTitle": "Gesicherte Lumeneo Wallet",
+      "tagLine": "Der einfachste Weg Lumeneo jederzeit und überall zu nutzen",
       "actions": {
         "loadWallet": "Lade meine Wallet",
         "importWallet": "Importiere eine Wallet",
@@ -81,7 +81,7 @@
         },
         "technology": {
           "title": "Einzigartige Technologie",
-          "description": "Direkt mit der TurtleCoin Blockchain verbunden!"
+          "description": "Direkt mit der Lumeneo Blockchain verbunden!"
         },
         "openSource": {
           "title": "Komplett open-source",
@@ -97,8 +97,7 @@
       },
       "balanceBlock": {
         "title": "Dein Guthaben",
-        "unlocked": "Entsperrt",
-        "fusions": "Fusion transactions to unlock"
+        "unlocked": "Entsperrt"
       },
       "historyBlock": {
         "title": "Transaktionshistorie",
@@ -106,7 +105,7 @@
         "emptyWallet": "Du hast zur Zeit kein Guthaben auf dieser Wallet",
         "waitSync": "Warte bis die Wallet upgedated ist",
         "beReallyPatient": "Die erste Einrichtung kann etwas dauern...",
-        "getTRTLAddress": "Hol die deine Adresse um TRTL zu empfangen"
+        "getLMOAddress": "Hol die deine Adresse um LMO zu empfangen"
       },
       "txDetails": {
         "title": "Transaktionsdetails",
@@ -142,7 +141,7 @@
       },
       "finalizationStep": {
         "title": "Das war einfach. Dein Account ist bereit!",
-        "subtitle": "Benutze TurtleCoin wie noch nie zuvor",
+        "subtitle": "Benutze Lumeneo wie noch nie zuvor",
         "passwordSelectionBlock": {
           "label": "Schütze deine Daten mit einem Passwort"
         },
@@ -160,13 +159,13 @@
           "mnemonicPhrase": "Mnemonic phrase",
           "separatorManualMethodsSolution": " oder ",
           "confirmManuallyWritten": "Ich habe es aufgeschieben",
-          "warningMessage": "**Auf keinen Fall verlieren!** Sie können nicht wiederhergestellt werden wenn du sie verlierst.<br/>**Nicht weitergeben!** Deine TurtleCoin werden gestohlen werden wenn diese Datei auf einer bösartigen/Phishing Seite benutzt.<br/>**Mache ein Backup!** Sichere es so wie die Millionen Euro, die es eines Tages vielleicht wert sein wird.<br/>",
+          "warningMessage": "**Auf keinen Fall verlieren!** Sie können nicht wiederhergestellt werden wenn du sie verlierst.<br/>**Nicht weitergeben!** Deine Lumeneo werden gestohlen werden wenn diese Datei auf einer bösartigen/Phishing Seite benutzt.<br/>**Mache ein Backup!** Sichere es so wie die Millionen Euro, die es eines Tages vielleicht wert sein wird.<br/>",
           "finishButton": "Ich habe verstanden. Weiter"
         }
       },
       "disclaimerBlock": {
-        "title": "Risiko beim benutzen der TurtleCoinWallet",
-        "content": "TurtleCoinWallet ist ein web-basierendes Interface. Es hilft beim Nutzen von TurtleCoin ohne einen vollen Node zu betreiben. <br/>Wir empfehlen TurtleCoinWallet sicherheitstechnisch wie eine richtige Wallet zu behandeln."
+        "title": "Risiko beim benutzen der LumeneoWallet",
+        "content": "LumeneoWallet ist ein web-basierendes Interface. Es hilft beim Nutzen von Lumeneo ohne einen vollen Node zu betreiben. <br/>Wir empfehlen LumeneoWallet sicherheitstechnisch wie eine richtige Wallet zu behandeln."
       }
     },
     "donatePage": {
@@ -176,9 +175,9 @@
         "title": "Webwallet",
         "content": "Diese Webwallet ist von Gnock in seiner Freizeit entwickelt.<br/>Bitte denk über eine Spende nach wenn dir die App gefällt und du bei der Bezahlung der Server und der Enwicklung helfen willst.: <br/><br/>"
       },
-      "masariFundBlock": {
-        "title": "TurtleCoin Entwicklerfonds",
-        "content": "Spende an diese Adresse um TurtleCoin zu helfen"
+      "pleFundBlock": {
+        "title": "Lumeneo Entwicklerfonds",
+        "content": "Spende an diese Adresse um Lumeneo zu helfen"
       }
     },
     "supportPage": {
@@ -187,7 +186,7 @@
       "getInTouchBlock": {
         "title": "Nehmen wir Kontakt auf!",
         "content": "Wenn du Ideen oder Feedback hast um die Wallet zu verbessern, kontaktiere uns!",
-        "discord": "TurtleCoin Discord Channel"
+        "discord": "Lumeneo Discord Channel"
       }
     },
     "networkPage": {
@@ -202,7 +201,7 @@
       }
     },
     "sendPage": {
-      "title": "Schicke TRTL",
+      "title": "Schicke LMO",
       "sendBlock": {
         "address": {
           "label": "Zieladresse",
@@ -232,7 +231,7 @@
       },
       "thankYouDonationModal": {
         "title": "Danke für deine Spende!",
-        "content": "Deine Hilfe wird sehr geschätzt. <br/>Diese Spende wird helfen TurtleCoin noch beser zu machen",
+        "content": "Deine Hilfe wird sehr geschätzt. <br/>Diese Spende wird helfen Lumeneo noch beser zu machen",
         "confirmText": "Schließen"
       },
       "transferSentModal": {
@@ -269,7 +268,7 @@
       }
     },
     "receivePage": {
-      "title": "Empfange TRTL",
+      "title": "Empfange LMO",
       "receiveBlock": {
         "address": {
           "title": "Deine Adresse um Guthaben zu empfangen",
@@ -297,10 +296,10 @@
     },
     "miningPage": {
       "title": "Mining information",
-      "subtitle": "Support the network by mining and be rewarded with TRTL",
+      "subtitle": "Support the network by mining and be rewarded with LMO",
       "contentBlock": {
         "title": "How to get started mining",
-        "intro": "Mining helps decentralise the network and allows you to earn TurtleCoin. There is no need for specialist equipment to mine TurtleCoin.",
+        "intro": "Mining helps decentralise the network and allows you to earn Lumeneo. There is no need for specialist equipment to mine Lumeneo.",
         "linkText": "Click here to read our mining guide"
       }
     },

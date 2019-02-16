@@ -67,33 +67,5 @@ namespace WebWallet.Helpers
             return lightTx;
         }
 
-        public static List<LightTx> MapTxs(List<CachedTx> txs) {
-            List<LightTx> outs = new List<LightTx>();
-            foreach (var tx in txs) {
-                outs.Add(MapTx(tx));
-            }
-            return outs;
-        }
-
-        public static LightTx MapTx(CachedTx tx)
-        {
-            LightTx lightTx = new LightTx();
-            lightTx.publicKey = tx.publicKey;
-            lightTx.hash = tx.hash;
-            lightTx.height = tx.height;
-            //map outputs
-            lightTx.vout = new List<LightOutput>();
-            if (tx.vout != null)
-            {
-                foreach (var outp in tx.vout)
-                {
-                    var lightOutput = new LightOutput();
-                    lightOutput.key = outp.key;
-                    lightTx.vout.Add(lightOutput);
-                }
-            }
-            return lightTx;
-        }
-
     }
 }
